@@ -5,21 +5,11 @@ import entites.Personne;
 
 public class TestPersonne {
     public static void main(String[] args) {
-        Personne moulaye = new Personne();
-        Personne aman = new Personne();
-        AdressePostale adresse = new AdressePostale();
-        adresse.numRue = "298";
-        adresse.libelleRue = "Rue du grand champ";
-        adresse.codePostal = "34790";
-        adresse.ville = "Grabels";
-        moulaye.nom = "HAÏDARA";
-        moulaye.prenom = "Moulaye";
-        aman.nom = "HAÏDARA";
-        aman.prenom = "Aman";
-        moulaye.adresse = adresse;
-        aman.adresse = adresse;
-        System.out.println(moulaye);
-        System.out.println(aman);
+        AdressePostale adresse = new AdressePostale("870", "rue de la valsière",  "34790", "Grabels");
+        Personne moulaye = new Personne("HAÏDARA", "Moulaye", adresse);
+        Personne aman = new Personne("HAÏDARA", "Aman", adresse);
+        System.out.println("Moulaye a pour nom : " + moulaye.nom);
+        System.out.println("Aman a pour libellé de rue : " +  aman.adresse.libelleRue);
 
     }
 }
