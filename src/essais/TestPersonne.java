@@ -14,5 +14,6 @@ public class TestPersonne {
         System.out.println("Moulaye a pour nom : " + moulaye.nom);
         System.out.println("Aman a pour libellé de rue : " +  aman.adresse.libelleRue);
 
+
     }
 }
