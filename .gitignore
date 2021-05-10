@@ -1,0 +1,4 @@
+*.class
+/.gradle/
+/src/essais/Test.java
+/src/essais/TestTest.java
