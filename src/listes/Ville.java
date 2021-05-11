@@ -74,6 +74,10 @@ public class Ville implements Comparable<Ville> {
      */
     @Override
     public int compareTo(Ville o) {
-        return this.nom.compareToIgnoreCase(o.nom);
+            if (this.nbHabitants > o.nbHabitants)
+                return 1;
+            if (this.nbHabitants < o.nbHabitants)
+                return -1;
+            return 0;
     }
 }
