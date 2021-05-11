@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CreationListe {
     public static void main(String[] args) {
-        ArrayList<Integer> listEntier = new ArrayList<Integer>();
+        ArrayList<Integer> listEntier = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             listEntier.add(i+1);
         }
