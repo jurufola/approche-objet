@@ -21,7 +21,7 @@ public class MapVilles {
 
         Iterator<Ville> iterator = mapVilles.values().iterator();
         //Suppression Villee qui a le moins d'habitant//
-        Ville villeLaMoinsPeuplee = mapVilles.get("Nice");
+        Ville villeLaMoinsPeuplee = mapVilles.get("Nice");// Initialisation à Nice
             //Recherche Ville la moins peuplée
         while (iterator.hasNext()) {
             Ville ville = iterator.next();
