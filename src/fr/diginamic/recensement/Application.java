@@ -51,6 +51,11 @@ public class Application {
                 System.out.println("Meri de saisir un code de départemanent : ");
                 recherchePopulationDepartement.traiter(recensement, sc);
             break;
+            case 3:
+                System.out.println("Merci de saisir un nom de région : ");
+                Region region = new Region(new ArrayList<Departement>(), "region bidon");
+                region.traiter(recensement, sc);
+                break;
 
         }
     }

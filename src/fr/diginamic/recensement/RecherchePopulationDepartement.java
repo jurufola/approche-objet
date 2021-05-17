@@ -9,7 +9,6 @@ public class RecherchePopulationDepartement extends MenuService{
         String codeDepartement = scanner.next();
         int populationDepartement = 0;
         Iterator<Ville> iterator = recensement.getVilles().iterator();
-        boolean trouve = false;
         while (iterator.hasNext()) {
             Ville ville = iterator.next();
             System.out.println(" Je traite la ville de " + ville.getNomCommune());
