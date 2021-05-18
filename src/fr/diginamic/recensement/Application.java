@@ -83,6 +83,16 @@ public class Application {
                 }
                 System.out.println(departements.size());
                 break;
+            case 6:
+                System.out.println("Veuillez saisir un code de département : ");
+                Departement departement = new Departement(recensement, sc.next());
+                departement.villesLesPlusPeuplees();
+                break;
+            case 7:
+                System.out.println("Veuillez saisir un nom de région : ");
+                Region region2 = new Region(recensement, sc.next());
+                region2.villesLesPlusPeuplees();
+                break;
         }
     }
     public static void AffichMenu() {

@@ -2,6 +2,7 @@ package fr.diginamic.recensement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Departement implements Comparable<Departement>{
     private String codeDepartement;
@@ -103,5 +104,19 @@ public class Departement implements Comparable<Departement>{
 
     public void setPopulationDepartement(int populationDepartement) {
         this.populationDepartement = populationDepartement;
+    }
+
+    public void villesLesPlusPeuplees(){
+        ArrayList<Ville> villes = this.getVilles();
+        if (villes.size() == 0) {
+            System.out.println("Le Département " + this.getCodeDepartement() + " est inconnu");
+        }else {
+            System.out.println("La Département " + this.getCodeDepartement() + " a " + villes.size() + " communes");
+            Collections.sort(villes);
+            System.out.println("Les 10 villes les plus peuplées du département  " + this.getCodeDepartement()+ " : ");
+            for (int i = villes.size() - 1; i >= villes.size() - 10; i--) {
+                System.out.println(villes.get(i).getNomCommune() + " de population " + villes.get(i).getPopulationTotale());
+            }
+        }
     }
 }

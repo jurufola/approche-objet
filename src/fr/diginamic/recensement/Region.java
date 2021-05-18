@@ -1,9 +1,6 @@
 package fr.diginamic.recensement;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Region extends MenuService implements Comparable<Region> {
     private ArrayList<Departement> departements;
@@ -142,5 +139,23 @@ public class Region extends MenuService implements Comparable<Region> {
             }
         }
         return false;
+    }
+
+    public void villesLesPlusPeuplees(){
+        ArrayList<Ville> villes = new ArrayList<>();
+        ArrayList<Departement> departements = this.getDepartements();
+        for (Departement departement : departements) {
+            villes.addAll(departement.getVilles());
+        }
+        if (villes.size() == 0) {
+            System.out.println("La region " + this.getNomRegion() + " est inconnue");
+        }else {
+            System.out.println("La région " + this.getNomRegion() + " a " + villes.size() + " communes");
+            Collections.sort(villes);
+            System.out.println("Les 10 villes les plus peuplées de la région " + this.getNomRegion() + " : ");
+            for (int i = villes.size() - 1; i >= villes.size() - 10; i--) {
+                System.out.println(villes.get(i).getNomCommune() + " de population " + villes.get(i).getPopulationTotale());
+            }
+        }
     }
 }
