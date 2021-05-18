@@ -1,5 +1,7 @@
 package fr.diginamic.recensement;
 
+import com.sun.source.tree.WhileLoopTree;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -26,74 +28,93 @@ public class Application {
         Recensement recensement = new Recensement(villes);
         // Menu
         Scanner sc = new Scanner(System.in);
-        AffichMenu();
-        int choix = sc.nextInt();
+        boolean sortir = false;
+        while(!sortir) {
+            AffichMenu();
+            int choix = sc.nextInt();
+            switch (choix) {
+                case 1:
+                    RecherchePopulationVille recherchePopulationVille = new RecherchePopulationVille();
+                    System.out.println("Veuillez saisir un nom de ville : ");
+                    recherchePopulationVille.traiter(recensement, sc);
+                    break;
+                case 2:
+                    RecherchePopulationDepartement recherchePopulationDepartement = new RecherchePopulationDepartement();
+                    System.out.println("Merci de saisir un code de départemanent : ");
+                    recherchePopulationDepartement.traiter(recensement, sc);
+                    break;
+                case 3:
+                    System.out.println("Merci de saisir un nom de région : ");
+                    Region region = new Region(new ArrayList<Departement>(), "region bidon", 125456852);
+                    region.traiter(recensement, sc);
+                    break;
+                case 4:
+                    System.out.println("Les 10 regions les plus peuplées: ");
+                    ArrayList<Region> regions = new ArrayList<>();
 
-
-
-        switch (choix) {
-            case 1:
-                RecherchePopulationVille recherchePopulationVille = new RecherchePopulationVille();
-                System.out.println("Veuillez saisir un nom de ville : ");
-                recherchePopulationVille.traiter(recensement, sc);
-                break;
-            case 2:
-                RecherchePopulationDepartement recherchePopulationDepartement = new RecherchePopulationDepartement();
-                System.out.println("Merci de saisir un code de départemanent : ");
-                recherchePopulationDepartement.traiter(recensement, sc);
-                break;
-            case 3:
-                System.out.println("Merci de saisir un nom de région : ");
-                Region region = new Region(new ArrayList<Departement>(), "region bidon", 125456852);
-                region.traiter(recensement, sc);
-                break;
-            case 4:
-                System.out.println("Les 10 regions les plus peuplées: ");
-                ArrayList<Region> regions = new ArrayList<>();
-
-                for (Ville ville : recensement.getVilles()) {
-                    if (!ListContainRegion(regions,ville.getNomRegion())) {
-                        Region region1 = new Region(recensement, ville.getNomRegion());
-                        regions.add(region1);
-                       // System.out.println(region1);
+                    for (Ville ville : recensement.getVilles()) {
+                        if (!ListContainRegion(regions,ville.getNomRegion())) {
+                            Region region1 = new Region(recensement, ville.getNomRegion());
+                            regions.add(region1);
+                            // System.out.println(region1);
+                        }
                     }
-                }
-                Collections.sort(regions);
-                for (int i = regions.size() - 1; i >= regions.size() - 10 ; i--) {
+                    Collections.sort(regions);
+                    for (int i = regions.size() - 1; i >= regions.size() - 10 ; i--) {
 
-                    System.out.println(" Region " + regions.get(i).getNomRegion() + " de population " + regions.get(i).getPopulationRegion());
-                }
-                System.out.println(regions.size());
-                break;
-            case 5:
-                System.out.println("Les 10 départements les plus peuplés: ");
-                ArrayList<Departement> departements = new ArrayList<>();
-
-                for (Ville ville : recensement.getVilles()) {
-                    if (!ListContainDepartement(departements, ville.getCodeDepartement())) {
-                        Departement departement = new Departement(recensement, ville.getCodeDepartement());
-                        departements.add(departement);
-                        // System.out.println(region1);
+                        System.out.println(" Region " + regions.get(i).getNomRegion() + " de population " + regions.get(i).getPopulationRegion());
                     }
-                }
-                Collections.sort(departements);
-                for (int i = departements.size() - 1; i >= departements.size() - 10 ; i--) {
+                    System.out.println(regions.size());
+                    break;
+                case 5:
+                    System.out.println("Les 10 départements les plus peuplés: ");
+                    ArrayList<Departement> departements = new ArrayList<>();
 
-                    System.out.println(" Département " + departements.get(i).getCodeDepartement() + " de population " + departements.get(i).getPopulationDepartement());
-                }
-                System.out.println(departements.size());
-                break;
-            case 6:
-                System.out.println("Veuillez saisir un code de département : ");
-                Departement departement = new Departement(recensement, sc.next());
-                departement.villesLesPlusPeuplees();
-                break;
-            case 7:
-                System.out.println("Veuillez saisir un nom de région : ");
-                Region region2 = new Region(recensement, sc.next());
-                region2.villesLesPlusPeuplees();
-                break;
+                    for (Ville ville : recensement.getVilles()) {
+                        if (!ListContainDepartement(departements, ville.getCodeDepartement())) {
+                            Departement departement = new Departement(recensement, ville.getCodeDepartement());
+                            departements.add(departement);
+                            // System.out.println(region1);
+                        }
+                    }
+                    Collections.sort(departements);
+                    for (int i = departements.size() - 1; i >= departements.size() - 10 ; i--) {
+
+                        System.out.println(" Département " + departements.get(i).getCodeDepartement() + " de population " + departements.get(i).getPopulationDepartement());
+                    }
+                    System.out.println(departements.size());
+                    break;
+                case 6:
+                    System.out.println("Veuillez saisir un code de département : ");
+                    Departement departement = new Departement(recensement, sc.next());
+                    departement.villesLesPlusPeuplees();
+                    break;
+
+                case 7:
+                    System.out.println("Veuillez saisir un nom de région : ");
+                    Region region2 = new Region(recensement, sc.next());
+                    region2.villesLesPlusPeuplees();
+                    break;
+
+                case 8:
+                    System.out.println("Les 10 villes les plus peuplées de France ");
+                    Collections.sort(recensement.getVilles());
+                    for (int i = recensement.getVilles().size() - 1; i >= recensement.getVilles().size() - 10; i--) {
+                        System.out.println(recensement.getVilles().get(i).getNomCommune() + " de population " + recensement.getVilles().get(i).getPopulationTotale());
+                    }
+                    break;
+
+                case 9:
+                    sortir = true;
+                    System.out.println("Au revoir ...");
+                    break;
+
+                default:
+                    System.out.println("Option non permise merci de choir entre 1 et 9");
+
+            }
         }
+
     }
     public static void AffichMenu() {
         System.out.println("********** Menu **********");
