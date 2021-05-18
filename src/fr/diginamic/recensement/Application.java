@@ -6,10 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Application {
     public static void main(String[] args) throws IOException {
@@ -23,8 +20,7 @@ public class Application {
            String line = iterator.next();
            String[] tabLine = line.split(";");
            Ville ville = new Ville(tabLine[0], tabLine[1], tabLine[2], tabLine[5], tabLine[6], Integer.parseInt((tabLine[9]).replaceAll(" ", "")));
-            //System.out.println(ville);
-            villes.add(ville);
+           villes.add(ville);
         }
         System.out.println(villes.size());
         Recensement recensement = new Recensement(villes);
@@ -33,12 +29,7 @@ public class Application {
         AffichMenu();
         int choix = sc.nextInt();
 
-        for (Ville ville : recensement.getVilles()) {
-            if (ville.getNomCommune().equalsIgnoreCase("Lyon 1er arrondissement")) {
 
-                System.out.println(ville);
-            }
-        }
 
         switch (choix) {
             case 1:
@@ -48,13 +39,33 @@ public class Application {
                 break;
             case 2:
                 RecherchePopulationDepartement recherchePopulationDepartement = new RecherchePopulationDepartement();
-                System.out.println("Meri de saisir un code de départemanent : ");
+                System.out.println("Merci de saisir un code de départemanent : ");
                 recherchePopulationDepartement.traiter(recensement, sc);
-            break;
+                break;
             case 3:
                 System.out.println("Merci de saisir un nom de région : ");
-                Region region = new Region(new ArrayList<Departement>(), "region bidon");
+                Region region = new Region(new ArrayList<Departement>(), "region bidon", 125456852);
                 region.traiter(recensement, sc);
+                break;
+            case 4:
+                System.out.println("Les 10 regions les plus peuplées: ");
+                ArrayList<Region> regions = new ArrayList<>();
+
+                for (Ville ville : recensement.getVilles()) {
+                    if (!ListContainRegion(regions,ville.getNomRegion())) {
+                        Region region1 = new Region(recensement, ville.getNomRegion());
+                        regions.add(region1);
+                       // System.out.println(region1);
+                    }
+                }
+                Collections.sort(regions);
+                for (int i = regions.size() - 1; i >= regions.size() - 10 ; i--) {
+
+                    System.out.println(" Region " + regions.get(i).getNomRegion() + " de population " + regions.get(i).getPopulationRegion());
+                }
+
+                System.out.println(regions.size());
+                System.out.println();
                 break;
 
         }
@@ -70,5 +81,14 @@ public class Application {
         System.out.println("-   7. Afficher les 10 villes les plus peuplées d’une région");
         System.out.println("-   8. Afficher les 10 villes les plus peuplées de France");
         System.out.println("-   9. Sortir");
+    }
+    public static boolean ListContainRegion(ArrayList<Region> regions, String nomReg) {
+
+        for (Region region : regions) {
+            if (region.getNomRegion().equalsIgnoreCase(nomReg)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
