@@ -63,11 +63,26 @@ public class Application {
 
                     System.out.println(" Region " + regions.get(i).getNomRegion() + " de population " + regions.get(i).getPopulationRegion());
                 }
-
                 System.out.println(regions.size());
-                System.out.println();
                 break;
+            case 5:
+                System.out.println("Les 10 départements les plus peuplés: ");
+                ArrayList<Departement> departements = new ArrayList<>();
 
+                for (Ville ville : recensement.getVilles()) {
+                    if (!ListContainDepartement(departements, ville.getCodeDepartement())) {
+                        Departement departement = new Departement(recensement, ville.getCodeDepartement());
+                        departements.add(departement);
+                        // System.out.println(region1);
+                    }
+                }
+                Collections.sort(departements);
+                for (int i = departements.size() - 1; i >= departements.size() - 10 ; i--) {
+
+                    System.out.println(" Département " + departements.get(i).getCodeDepartement() + " de population " + departements.get(i).getPopulationDepartement());
+                }
+                System.out.println(departements.size());
+                break;
         }
     }
     public static void AffichMenu() {
@@ -86,6 +101,16 @@ public class Application {
 
         for (Region region : regions) {
             if (region.getNomRegion().equalsIgnoreCase(nomReg)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean ListContainDepartement(ArrayList<Departement> departements, String codeDepartement) {
+
+        for (Departement departement : departements) {
+            if (departement.getCodeDepartement().equalsIgnoreCase(codeDepartement)) {
                 return true;
             }
         }
