@@ -6,14 +6,15 @@ import java.util.Scanner;
 public class RecherchePopulationVille extends MenuService{
     @Override
     public void traiter(Recensement recensement, Scanner scanner) {
-        String nomVille = scanner.next();
+        scanner.nextLine();
+        String nomVille = scanner.nextLine();
+        System.out.println("Voici le nom de la commune renseignée " + nomVille);
         Iterator<Ville> iterator = recensement.getVilles().iterator();
         boolean trouve = false;
-        while (iterator.hasNext() && !trouve) {
+        while (iterator.hasNext()) {
             Ville ville = iterator.next();
-            System.out.println(" Je traite la ville de " + ville.getNomCommune());
             if (ville.getNomCommune().equalsIgnoreCase((nomVille))) {
-                System.out.println(" La population de la ville de " + ville.getNomCommune() + " est de " + ville.getPopulationTotale());
+                System.out.println(ville);
                 trouve = true;
             }
         }

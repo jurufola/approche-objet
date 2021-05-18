@@ -11,7 +11,6 @@ public class RecherchePopulationDepartement extends MenuService{
         Iterator<Ville> iterator = recensement.getVilles().iterator();
         while (iterator.hasNext()) {
             Ville ville = iterator.next();
-            System.out.println(" Je traite la ville de " + ville.getNomCommune());
             if (ville.getCodeDepartement().equalsIgnoreCase(codeDepartement)) {
                 System.out.println(ville);
                 populationDepartement+= ville.getPopulationTotale();

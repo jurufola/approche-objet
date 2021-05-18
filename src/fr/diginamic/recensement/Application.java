@@ -23,13 +23,15 @@ public class Application {
            String[] tabLine = line.split(";");
            Ville ville = new Ville(tabLine[0], tabLine[1], tabLine[2], tabLine[5], tabLine[6], Integer.parseInt((tabLine[9]).replaceAll(" ", "")));
            villes.add(ville);
+           if (ville.getNomCommune().startsWith("Lyon"))
+            System.out.println(ville);
         }
-        System.out.println(villes.size());
+        //System.out.println(villes.size());
         Recensement recensement = new Recensement(villes);
         // Menu
-        Scanner sc = new Scanner(System.in);
         boolean sortir = false;
         while(!sortir) {
+            Scanner sc = new Scanner(System.in);
             AffichMenu();
             int choix = sc.nextInt();
             switch (choix) {
@@ -45,8 +47,8 @@ public class Application {
                     break;
                 case 3:
                     System.out.println("Merci de saisir un nom de région : ");
-                    Region region = new Region(new ArrayList<Departement>(), "region bidon", 125456852);
-                    region.traiter(recensement, sc);
+                    Region regionIdf = new Region(recensement, "Île-de-France");
+                    regionIdf.traiter(recensement, sc);
                     break;
                 case 4:
                     System.out.println("Les 10 regions les plus peuplées: ");
@@ -54,9 +56,8 @@ public class Application {
 
                     for (Ville ville : recensement.getVilles()) {
                         if (!ListContainRegion(regions,ville.getNomRegion())) {
-                            Region region1 = new Region(recensement, ville.getNomRegion());
-                            regions.add(region1);
-                            // System.out.println(region1);
+                            Region region = new Region(recensement, ville.getNomRegion());
+                            regions.add(region);
                         }
                     }
                     Collections.sort(regions);
@@ -64,7 +65,6 @@ public class Application {
 
                         System.out.println(" Region " + regions.get(i).getNomRegion() + " de population " + regions.get(i).getPopulationRegion());
                     }
-                    System.out.println(regions.size());
                     break;
                 case 5:
                     System.out.println("Les 10 départements les plus peuplés: ");
@@ -82,7 +82,7 @@ public class Application {
 
                         System.out.println(" Département " + departements.get(i).getCodeDepartement() + " de population " + departements.get(i).getPopulationDepartement());
                     }
-                    System.out.println(departements.size());
+                   // System.out.println(departements.size());
                     break;
                 case 6:
                     System.out.println("Veuillez saisir un code de département : ");
@@ -92,7 +92,8 @@ public class Application {
 
                 case 7:
                     System.out.println("Veuillez saisir un nom de région : ");
-                    Region region2 = new Region(recensement, sc.next());
+                    sc.nextLine();
+                    Region region2 = new Region(recensement, sc.nextLine());
                     region2.villesLesPlusPeuplees();
                     break;
 

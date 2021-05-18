@@ -68,12 +68,12 @@ public class Region extends MenuService implements Comparable<Region> {
 
     @Override
     public void traiter(Recensement recensement, Scanner scanner) {
-        String nomRegion = scanner.next();
+        scanner.nextLine();
+        String nomRegion = scanner.nextLine();
         int populationRegion = 0;
         Iterator<Ville> iterator = recensement.getVilles().iterator();
         while (iterator.hasNext()) {
             Ville ville = iterator.next();
-            System.out.println(" Je traite la ville de " + ville.getNomCommune());
             if (ville.getNomRegion().equalsIgnoreCase(nomRegion)) {
                 System.out.println(ville);
                 populationRegion+= ville.getPopulationTotale();
