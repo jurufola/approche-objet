@@ -30,8 +30,8 @@ public class Application {
         Recensement recensement = new Recensement(villes);
         // Menu
         boolean sortir = false;
+        Scanner sc = new Scanner(System.in);
         while(!sortir) {
-            Scanner sc = new Scanner(System.in);
             AffichMenu();
             int choix = sc.nextInt();
             switch (choix) {
@@ -42,7 +42,7 @@ public class Application {
                     break;
                 case 2:
                     RecherchePopulationDepartement recherchePopulationDepartement = new RecherchePopulationDepartement();
-                    System.out.println("Merci de saisir un code de départemanent : ");
+                    System.out.println("Merci de saisir un code de département : ");
                     recherchePopulationDepartement.traiter(recensement, sc);
                     break;
                 case 3:
@@ -115,6 +115,7 @@ public class Application {
 
             }
         }
+        sc.close();
 
     }
     public static void AffichMenu() {
