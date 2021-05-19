@@ -23,6 +23,8 @@ public class TestCalendar {
         System.out.println(formateur2.format(date2));
         SimpleDateFormat formateurFrance = new SimpleDateFormat("EEEEE dd MMMMM yyyy HH:mm:ss", Locale.FRANCE);
         System.out.println(formateurFrance.format(date2));
+        SimpleDateFormat formateurRusse = new SimpleDateFormat("EEEEE dd MMMMM yyyy HH:mm:ss", new Locale("Ru"));
+        System.out.println(formateurRusse.format(date2));
         SimpleDateFormat formateurChine = new SimpleDateFormat("EEEEE dd MMMMM yyyy HH:mm:ss", Locale.CHINA);
         System.out.println(formateurChine.format(date2));
         SimpleDateFormat formateurAllemagne = new SimpleDateFormat("EEEEE dd MMMMM yyyy HH:mm:ss", Locale.GERMAN);
