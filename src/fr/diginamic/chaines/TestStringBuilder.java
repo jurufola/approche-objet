@@ -2,20 +2,20 @@ package fr.diginamic.chaines;
 
 public class TestStringBuilder {
     public static void main(String[] args) {
-        /*long debut = System.currentTimeMillis();
-        StringBuilder chaine = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
+        long debutStringBuilder = System.currentTimeMillis();
         for (int i = 0; i < 100_000; i++) {
-            chaine.append(i+1);
+            stringBuilder.append(i+1);
         }
-        long fin = System.currentTimeMillis();
-        System.out.println("Temps écoulé en millisecondes :" + (fin - debut));*/
-        long debut = System.currentTimeMillis();
+        long finStringBuilder = System.currentTimeMillis();
+        System.out.println("StringBuilder: temps écoulé en millisecondes :" + (finStringBuilder- debutStringBuilder));
         String chaine = "";
+        long debut = System.currentTimeMillis();
         for (int i = 0; i < 100_000; i++) {
-           chaine+=i;
+           chaine+=i+1;
         }
         long fin = System.currentTimeMillis();
-        System.out.println("Temps écoulé en millisecondes :" + (fin - debut));
+        System.out.println("String: temps écoulé en millisecondes :" + (fin - debut));
     }
 
 }
